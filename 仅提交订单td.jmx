@@ -96,7 +96,7 @@
             </elementProp>
             <elementProp name="requiredDate" elementType="Argument">
               <stringProp name="Argument.name">requiredDate</stringProp>
-              <stringProp name="Argument.value">2020-10-23</stringProp>
+              <stringProp name="Argument.value">2021-10-23</stringProp>
               <stringProp name="Argument.metadata">=</stringProp>
               <stringProp name="Argument.desc">采购订单-配送日期</stringProp>
             </elementProp>
@@ -363,7 +363,22 @@ SELECT   DATE_FORMAT(NOW(), &apos;%Y&apos;)</stringProp>
             <stringProp name="TestPlan.comments">我的菜单-生成菜单</stringProp>
           </JDBCSampler>
           <hashTree/>
-          <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="我的菜单" enabled="true">
+          <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="JDBC Request(查询当前日期)" enabled="true">
+            <stringProp name="dataSource">mysql</stringProp>
+            <stringProp name="query">
+-- 查询下周周次
+select curdate()</stringProp>
+            <stringProp name="queryArguments"></stringProp>
+            <stringProp name="queryArgumentsTypes"></stringProp>
+            <stringProp name="queryTimeout"></stringProp>
+            <stringProp name="queryType">Select Statement</stringProp>
+            <stringProp name="resultSetHandler">Store as String</stringProp>
+            <stringProp name="resultVariable"></stringProp>
+            <stringProp name="variableNames">today</stringProp>
+            <stringProp name="TestPlan.comments">我的菜单-生成菜单</stringProp>
+          </JDBCSampler>
+          <hashTree/>
+          <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="统一菜单" enabled="true">
             <boolProp name="TransactionController.includeTimers">false</boolProp>
             <boolProp name="TransactionController.parent">false</boolProp>
           </TransactionController>
@@ -374,9 +389,324 @@ SELECT   DATE_FORMAT(NOW(), &apos;%Y&apos;)</stringProp>
                   <stringProp name="Header.name">Authorization</stringProp>
                   <stringProp name="Header.value">Bearer ${header}</stringProp>
                 </elementProp>
+              </collectionProp>
+            </HeaderManager>
+            <hashTree/>
+            <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="响应断言" enabled="true">
+              <collectionProp name="Asserion.test_strings">
+                <stringProp name="722570525">&quot;code&quot; : 0</stringProp>
+              </collectionProp>
+              <stringProp name="Assertion.custom_message"></stringProp>
+              <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
+              <boolProp name="Assertion.assume_success">false</boolProp>
+              <intProp name="Assertion.test_type">16</intProp>
+            </ResponseAssertion>
+            <hashTree/>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="获取统一菜单待采购列表-全部" enabled="true">
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="用户定义的变量" enabled="true">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="onlyIssued" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">true</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">onlyIssued</stringProp>
+                  </elementProp>
+                  <elementProp name="status" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value"></stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">status</stringProp>
+                  </elementProp>
+                  <elementProp name="startDate" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value"></stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">startDate</stringProp>
+                  </elementProp>
+                  <elementProp name="orderByField" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value"></stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">orderByField</stringProp>
+                  </elementProp>
+                  <elementProp name="isAsc" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value"></stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">isAsc</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain"></stringProp>
+              <stringProp name="HTTPSampler.port"></stringProp>
+              <stringProp name="HTTPSampler.protocol"></stringProp>
+              <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+              <stringProp name="HTTPSampler.path">/service/catering/camenu/pageQuery?</stringProp>
+              <stringProp name="HTTPSampler.method">GET</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+              <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+              <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            </HTTPSamplerProxy>
+            <hashTree/>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="获取统一菜单待采购列表-待采购" enabled="true">
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="用户定义的变量" enabled="true">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="onlyIssued" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">true</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">onlyIssued</stringProp>
+                  </elementProp>
+                  <elementProp name="status" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">00</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">status</stringProp>
+                  </elementProp>
+                  <elementProp name="startDate" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value"></stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">startDate</stringProp>
+                  </elementProp>
+                  <elementProp name="orderByField" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value"></stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">orderByField</stringProp>
+                  </elementProp>
+                  <elementProp name="isAsc" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value"></stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">isAsc</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain"></stringProp>
+              <stringProp name="HTTPSampler.port"></stringProp>
+              <stringProp name="HTTPSampler.protocol"></stringProp>
+              <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+              <stringProp name="HTTPSampler.path">/service/catering/camenu/pageQuery?</stringProp>
+              <stringProp name="HTTPSampler.method">GET</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+              <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+              <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            </HTTPSamplerProxy>
+            <hashTree/>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="获取统一菜单待采购列表-待下单" enabled="true">
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="用户定义的变量" enabled="true">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="onlyIssued" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">true</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">onlyIssued</stringProp>
+                  </elementProp>
+                  <elementProp name="status" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">01</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">status</stringProp>
+                  </elementProp>
+                  <elementProp name="startDate" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value"></stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">startDate</stringProp>
+                  </elementProp>
+                  <elementProp name="orderByField" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value"></stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">orderByField</stringProp>
+                  </elementProp>
+                  <elementProp name="isAsc" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value"></stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">isAsc</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain"></stringProp>
+              <stringProp name="HTTPSampler.port"></stringProp>
+              <stringProp name="HTTPSampler.protocol"></stringProp>
+              <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+              <stringProp name="HTTPSampler.path">/service/catering/camenu/pageQuery?</stringProp>
+              <stringProp name="HTTPSampler.method">GET</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+              <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+              <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            </HTTPSamplerProxy>
+            <hashTree/>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="获取统一菜单待采购列表-已下单" enabled="true">
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="用户定义的变量" enabled="true">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="onlyIssued" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">true</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">onlyIssued</stringProp>
+                  </elementProp>
+                  <elementProp name="status" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">10</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">status</stringProp>
+                  </elementProp>
+                  <elementProp name="startDate" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value"></stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">startDate</stringProp>
+                  </elementProp>
+                  <elementProp name="orderByField" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value"></stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">orderByField</stringProp>
+                  </elementProp>
+                  <elementProp name="isAsc" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value"></stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">isAsc</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain"></stringProp>
+              <stringProp name="HTTPSampler.port"></stringProp>
+              <stringProp name="HTTPSampler.protocol"></stringProp>
+              <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+              <stringProp name="HTTPSampler.path">/service/catering/camenu/pageQuery?</stringProp>
+              <stringProp name="HTTPSampler.method">GET</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+              <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+              <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            </HTTPSamplerProxy>
+            <hashTree/>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="获取统一菜单待采购列表-已过期" enabled="true">
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="用户定义的变量" enabled="true">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="onlyIssued" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">true</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">onlyIssued</stringProp>
+                  </elementProp>
+                  <elementProp name="status" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">09</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">status</stringProp>
+                  </elementProp>
+                  <elementProp name="startDate" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value"></stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">startDate</stringProp>
+                  </elementProp>
+                  <elementProp name="orderByField" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value"></stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">orderByField</stringProp>
+                  </elementProp>
+                  <elementProp name="isAsc" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value"></stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">isAsc</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain"></stringProp>
+              <stringProp name="HTTPSampler.port"></stringProp>
+              <stringProp name="HTTPSampler.protocol"></stringProp>
+              <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+              <stringProp name="HTTPSampler.path">/service/catering/camenu/pageQuery?</stringProp>
+              <stringProp name="HTTPSampler.method">GET</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+              <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+              <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            </HTTPSamplerProxy>
+            <hashTree/>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="查询单位配餐对象信息 dineObject" enabled="true">
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="用户定义的变量" enabled="true">
+                <collectionProp name="Arguments.arguments"/>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain"></stringProp>
+              <stringProp name="HTTPSampler.port"></stringProp>
+              <stringProp name="HTTPSampler.protocol"></stringProp>
+              <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+              <stringProp name="HTTPSampler.path">/service/catering/dineObject/listQuery</stringProp>
+              <stringProp name="HTTPSampler.method">GET</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+              <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+              <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            </HTTPSamplerProxy>
+            <hashTree/>
+          </hashTree>
+          <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="我的菜单" enabled="true">
+            <boolProp name="TransactionController.includeTimers">false</boolProp>
+            <boolProp name="TransactionController.parent">false</boolProp>
+          </TransactionController>
+          <hashTree>
+            <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP信息头管理器" enabled="true">
+              <collectionProp name="HeaderManager.headers">
                 <elementProp name="" elementType="Header">
-                  <stringProp name="Header.name"></stringProp>
-                  <stringProp name="Header.value"></stringProp>
+                  <stringProp name="Header.name">Authorization</stringProp>
+                  <stringProp name="Header.value">Bearer ${header}</stringProp>
                 </elementProp>
               </collectionProp>
             </HeaderManager>
@@ -680,7 +1010,7 @@ SELECT   DATE_FORMAT(NOW(), &apos;%Y&apos;)</stringProp>
               <stringProp name="HTTPSampler.domain"></stringProp>
               <stringProp name="HTTPSampler.port"></stringProp>
               <stringProp name="HTTPSampler.protocol"></stringProp>
-              <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+              <stringProp name="HTTPSampler.contentEncoding">utf-8</stringProp>
               <stringProp name="HTTPSampler.path">/service/catering/camenuTemplate/${camenuTemplate_id_1}?</stringProp>
               <stringProp name="HTTPSampler.method">GET</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -1042,7 +1372,7 @@ SELECT   DATE_FORMAT(NOW(), &apos;%Y&apos;)</stringProp>
             &quot;sort&quot;:0&#xd;
         },&#xd;
         {&#xd;
-            &quot;foodId&quot;:&quot;fad1bbf433f723cc493589d324254fb7&quot;,&#xd;
+            &quot;foodId&quot;:&quot;05c2a805634725296f5f3e3e0a62433e&quot;,&#xd;
             &quot;zj&quot;: &quot;${ZJ_2}&quot;,&#xd;
             &quot;mealTimes&quot;:&quot;${MealTimes_2}&quot;,&#xd;
             &quot;foodName&quot;: &quot;${foodName_2}&quot;,&#xd;
@@ -1065,7 +1395,7 @@ SELECT   DATE_FORMAT(NOW(), &apos;%Y&apos;)</stringProp>
             &quot;sort&quot;:1&#xd;
         },&#xd;
         {&#xd;
-            &quot;foodId&quot;:&quot;f3a49f0473ac8fb4659c344b29053dec&quot;,&#xd;
+            &quot;foodId&quot;:&quot;049a31626c7fe700f36b7d9ab11ba403&quot;,&#xd;
             &quot;zj&quot;: &quot;${ZJ_3}&quot;,&#xd;
             &quot;mealTimes&quot;:&quot;${MealTimes_3}&quot;,&#xd;
             &quot;foodName&quot;: &quot;${foodName_3}&quot;,&#xd;
@@ -1319,10 +1649,10 @@ SELECT   DATE_FORMAT(NOW(), &apos;%Y&apos;)</stringProp>
                 </collectionProp>
               </HeaderManager>
               <hashTree/>
-              <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="正则表达式提取器 id" enabled="true">
+              <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="正则表达式提取器 skuId" enabled="true">
                 <stringProp name="RegexExtractor.useHeaders">false</stringProp>
-                <stringProp name="RegexExtractor.refname">id</stringProp>
-                <stringProp name="RegexExtractor.regex">&quot;id&quot; : &quot;(.+?)&quot;,</stringProp>
+                <stringProp name="RegexExtractor.refname">skuId</stringProp>
+                <stringProp name="RegexExtractor.regex">&quot;skuId&quot; : &quot;(.+?)&quot;,</stringProp>
                 <stringProp name="RegexExtractor.template">$1$</stringProp>
                 <stringProp name="RegexExtractor.default"></stringProp>
                 <stringProp name="RegexExtractor.match_number">-1</stringProp>
@@ -1337,10 +1667,10 @@ SELECT   DATE_FORMAT(NOW(), &apos;%Y&apos;)</stringProp>
                 <stringProp name="RegexExtractor.match_number">-1</stringProp>
               </RegexExtractor>
               <hashTree/>
-              <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="正则表达式提取器 wholeName" enabled="true">
+              <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="正则表达式提取器 skuName" enabled="true">
                 <stringProp name="RegexExtractor.useHeaders">false</stringProp>
-                <stringProp name="RegexExtractor.refname">wholeName</stringProp>
-                <stringProp name="RegexExtractor.regex">&quot;wholeName&quot; : &quot;(.+?)&quot;</stringProp>
+                <stringProp name="RegexExtractor.refname">skuName</stringProp>
+                <stringProp name="RegexExtractor.regex">&quot;skuName&quot; : &quot;(.+?)&quot;</stringProp>
                 <stringProp name="RegexExtractor.template">$1$</stringProp>
                 <stringProp name="RegexExtractor.default"></stringProp>
                 <stringProp name="RegexExtractor.match_number">-1</stringProp>
@@ -1454,125 +1784,141 @@ SELECT   DATE_FORMAT(NOW(), &apos;%Y&apos;)</stringProp>
                   <elementProp name="" elementType="HTTPArgument">
                     <boolProp name="HTTPArgument.always_encode">false</boolProp>
                     <stringProp name="Argument.value">{&#xd;
-	&quot;camenuId&quot;:&quot;${camenu_ID}&quot;,&#xd;
-	&quot;channel&quot;:&quot;M&quot;,&#xd;
-	&quot;orderDetailVos&quot;:&#xd;
-	[&#xd;
-	{	&quot;price&quot;:3,&quot;quantity&quot;:${quantity_1},&#xd;
-		&quot;supplierId&quot;:&quot;${supplierID}&quot;,&#xd;
-		&quot;skuId&quot;:&quot;${id_1}&quot;,&quot;unit&quot;:&quot;${unit_1}&quot;,&quot;requiredDate&quot;:&quot;${requiredDate}&quot;,&#xd;
-		&quot;note&quot;:&quot;&quot;,&#xd;
-		&quot;orderDetailGroups&quot;:[&#xd;
-			 {&#xd;
-          		&quot;accountingGroupName&quot;:&quot;${accountingGroupName_2}&quot;,&#xd;
-                    &quot;quantity&quot;:${quantity_2}&#xd;
-                },&#xd;
-                {&#xd;
-                    &quot;accountingGroupName&quot;:&quot;${accountingGroupName_1}&quot;,&#xd;
-                    &quot;quantity&quot;:${quantity_3}&#xd;
-                }&#xd;
-            ]&#xd;
-        },{	&quot;price&quot;:1,&quot;quantity&quot;:2,    &#xd;
-		&quot;supplierId&quot;:&quot;${supplierID}&quot;,&#xd;
-		&quot;skuId&quot;:&quot;${id_3}&quot;,&quot;unit&quot;:&quot;${unit_2}&quot;,&quot;requiredDate&quot;:&quot;${requiredDate}&quot;,&#xd;
-		&quot;note&quot;:&quot;&quot;,&#xd;
-		&quot;orderDetailGroups&quot;:[&#xd;
-			 {&#xd;
-          		&quot;accountingGroupName&quot;:&quot;${accountingGroupName_2}&quot;,&#xd;
-                    &quot;quantity&quot;:1&#xd;
-                },&#xd;
-                {&#xd;
-                    &quot;accountingGroupName&quot;:&quot;${accountingGroupName_1}&quot;,&#xd;
-                    &quot;quantity&quot;:1&#xd;
-                }&#xd;
-            ]&#xd;
-        },&#xd;
-	{	&quot;price&quot;:5,&quot;quantity&quot;:${quantity_4},&#xd;
-		&quot;supplierId&quot;:&quot;${supplierID}&quot;,&#xd;
-		&quot;skuId&quot;:&quot;${id_5}&quot;,&quot;unit&quot;:&quot;${unit_3}&quot;,&quot;requiredDate&quot;:&quot;${requiredDate}&quot;,&#xd;
-		&quot;note&quot;:&quot;&quot;,&#xd;
-            &quot;orderDetailGroups&quot;:[&#xd;
-                {&#xd;
-                    &quot;accountingGroupName&quot;:&quot;${accountingGroupName_2}&quot;,&#xd;
-                    &quot;quantity&quot;:${quantity_5}&#xd;
-                },&#xd;
-                {&#xd;
-                    &quot;accountingGroupName&quot;:&quot;${accountingGroupName_1}&quot;,&#xd;
-                    &quot;quantity&quot;:${quantity_6}&#xd;
-                }&#xd;
-            ]&#xd;
-        },&#xd;
-	{	&quot;price&quot;:7,&quot;quantity&quot;:${quantity_7},&#xd;
-		&quot;supplierId&quot;:&quot;${supplierID}&quot;,&#xd;
-		&quot;skuId&quot;:&quot;${id_7}&quot;,&quot;unit&quot;:&quot;${unit_4}&quot;,&quot;requiredDate&quot;:&quot;${requiredDate}&quot;,&#xd;
-		&quot;note&quot;:&quot;&quot;,&#xd;
-            &quot;orderDetailGroups&quot;:[&#xd;
-                {&#xd;
-                    &quot;accountingGroupName&quot;:&quot;${accountingGroupName_2}&quot;,&#xd;
-                    &quot;quantity&quot;:${quantity_8}&#xd;
-                },&#xd;
-                {&#xd;
-                    &quot;accountingGroupName&quot;:&quot;${accountingGroupName_1}&quot;,&#xd;
-                    &quot;quantity&quot;:${quantity_9}&#xd;
-                }&#xd;
-        &#xd;
-            ],&#xd;
-            &quot;snack&quot;:false&#xd;
-        },		&#xd;
-	{	&quot;price&quot;:6,&quot;quantity&quot;:${quantity_4},&#xd;
-		&quot;supplierId&quot;:&quot;${supplierID}&quot;,&#xd;
-		&quot;skuId&quot;:&quot;${id_9}&quot;,&quot;unit&quot;:&quot;${unit_5}&quot;,&quot;requiredDate&quot;:&quot;${requiredDate}&quot;,&#xd;
-		&quot;note&quot;:&quot;&quot;,&#xd;
-            &quot;orderDetailGroups&quot;:[&#xd;
-                {&#xd;
-                    &quot;accountingGroupName&quot;:&quot;${accountingGroupName_2}&quot;,&#xd;
-                    &quot;quantity&quot;:${quantity_5}&#xd;
-                },&#xd;
-                {&#xd;
-                    &quot;accountingGroupName&quot;:&quot;${accountingGroupName_1}&quot;,&#xd;
-                    &quot;quantity&quot;:${quantity_6}&#xd;
-                }&#xd;
-            ],&#xd;
-            &quot;snack&quot;:false&#xd;
-        },	&#xd;
-     {	&quot;price&quot;:2,&quot;quantity&quot;:${quantity_7},&#xd;
-		&quot;supplierId&quot;:&quot;${supplierID}&quot;,&#xd;
-		&quot;skuId&quot;:&quot;${id_11}&quot;,&quot;unit&quot;:&quot;${unit_6}&quot;,&quot;requiredDate&quot;:&quot;${requiredDate}&quot;,&#xd;
-		&quot;note&quot;:&quot;&quot;,	&#xd;
-            &quot;orderDetailGroups&quot;:[&#xd;
-                {&#xd;
-                    &quot;accountingGroupName&quot;:&quot;${accountingGroupName_2}&quot;,&#xd;
-                    &quot;quantity&quot;:${quantity_8}&#xd;
-                },&#xd;
-                {&#xd;
-                    &quot;accountingGroupName&quot;:&quot;${accountingGroupName_1}&quot;,&#xd;
-                    &quot;quantity&quot;:${quantity_9}&#xd;
-                }&#xd;
-            ],&#xd;
-            &quot;snack&quot;:false&#xd;
-        },		&#xd;
-     {	&quot;price&quot;:5.5,&quot;quantity&quot;:${quantity_1},&#xd;
-		&quot;supplierId&quot;:&quot;${supplierID}&quot;,&#xd;
-		&quot;skuId&quot;:&quot;${id_13}&quot;,&quot;unit&quot;:&quot;${unit_7}&quot;,&quot;requiredDate&quot;:&quot;${requiredDate}&quot;,&#xd;
-		&quot;note&quot;:&quot;&quot;,	&#xd;
-            &quot;orderDetailGroups&quot;:[&#xd;
-                {&#xd;
-                    &quot;accountingGroupName&quot;:&quot;${accountingGroupName_2}&quot;,&#xd;
-                    &quot;quantity&quot;:${quantity_2}&#xd;
-                },&#xd;
-                {&#xd;
-                    &quot;accountingGroupName&quot;:&quot;${accountingGroupName_1}&quot;,&#xd;
-                    &quot;quantity&quot;:${quantity_3}&#xd;
-                }&#xd;
-            ],&#xd;
-            &quot;snack&quot;:false&#xd;
-        }&#xd;
-            ],&#xd;
-            &quot;snack&quot;:false		&#xd;
-	}&#xd;
-	]&#xd;
-}&#xd;
-		//  报未知错误时需要确认是否skuID取错了（检查上一接口返回值，有时会取成供货商id）</stringProp>
+        &quot;camenuId&quot;: &quot;${camenu_ID}&quot;,&#xd;
+        &quot;channel&quot;: &quot;M&quot;,&#xd;
+        &quot;orderDetailDtos&quot;: [&#xd;
+      {&#xd;
+      &quot;price&quot;: 1.8,&#xd;
+      &quot;quantity&quot;: ${quantity_1},&#xd;
+      &quot;requiredDate&quot;: &quot;${requiredDate}&quot;,&#xd;
+      &quot;skuId&quot;: &quot;${skuId_1}&quot;,&#xd;
+      &quot;supplierId&quot;: &quot;${supplierID}&quot;,&#xd;
+      &quot;unit&quot;: &quot;${unit_1}&quot;,&#xd;
+      &quot;note&quot;: &quot;&quot;,&#xd;
+      &quot;skuName&quot;: &quot;${skuName_1}&quot;,&#xd;
+      &quot;orderDetailGroups&quot;: [&#xd;
+          {&#xd;
+            &quot;accountingGroupName&quot;: &quot;${accountingGroupName_2}&quot;,&#xd;
+            &quot;quantity&quot;: 100&#xd;
+          },&#xd;
+           {&#xd;
+            &quot;accountingGroupName&quot;: &quot;${accountingGroupName_1}&quot;,&#xd;
+            &quot;quantity&quot;: 20&#xd;
+           }&#xd;
+          ]&#xd;
+      },&#xd;
+    {&#xd;
+      &quot;price&quot;: 6,&#xd;
+      &quot;quantity&quot;: 22,&#xd;
+      &quot;requiredDate&quot;: &quot;${requiredDate}&quot;,&#xd;
+      &quot;skuId&quot;: &quot;${skuId_2}&quot;,&#xd;
+      &quot;supplierId&quot;: &quot;${supplierID}&quot;,&#xd;
+      &quot;unit&quot;: &quot;${unit_2}&quot;,&#xd;
+      &quot;note&quot;: &quot;&quot;,&#xd;
+      &quot;skuName&quot;: &quot;${skuName_2}&quot;,&#xd;
+      &quot;orderDetailGroups&quot;: [&#xd;
+          {&#xd;
+            &quot;accountingGroupName&quot;: &quot;${accountingGroupName_2}&quot;,&#xd;
+            &quot;quantity&quot;: 100&#xd;
+          },&#xd;
+           {&#xd;
+            &quot;accountingGroupName&quot;: &quot;${accountingGroupName_1}&quot;,&#xd;
+            &quot;quantity&quot;: 20&#xd;
+           }&#xd;
+      	  ]&#xd;
+      },&#xd;
+      {&#xd;
+      &quot;price&quot;: 22,&#xd;
+      &quot;quantity&quot;: ${quantity_4},&#xd;
+      &quot;requiredDate&quot;: &quot;${requiredDate}&quot;,&#xd;
+      &quot;skuId&quot;: &quot;${skuId_3}&quot;,&#xd;
+      &quot;supplierId&quot;: &quot;${supplierID}&quot;,&#xd;
+      &quot;unit&quot;: &quot;${unit_3}&quot;,&#xd;
+      &quot;note&quot;: &quot;&quot;,&#xd;
+      &quot;skuName&quot;: &quot;${skuName_3}&quot;,&#xd;
+      &quot;orderDetailGroups&quot;: [&#xd;
+          {&#xd;
+            &quot;accountingGroupName&quot;: &quot;${accountingGroupName_2}&quot;,&#xd;
+            &quot;quantity&quot;: 100&#xd;
+          },&#xd;
+           {&#xd;
+            &quot;accountingGroupName&quot;: &quot;${accountingGroupName_1}&quot;,&#xd;
+            &quot;quantity&quot;: 20&#xd;
+           }&#xd;
+      	]&#xd;
+      },&#xd;
+      {&#xd;
+      &quot;price&quot;: 7,&#xd;
+      &quot;quantity&quot;: ${quantity_1},&#xd;
+      &quot;requiredDate&quot;: &quot;${requiredDate}&quot;,&#xd;
+      &quot;skuId&quot;: &quot;${skuId_4}&quot;,&#xd;
+      &quot;supplierId&quot;: &quot;${supplierID}&quot;,&#xd;
+      &quot;unit&quot;: &quot;${unit_4}&quot;,&#xd;
+      &quot;note&quot;: &quot;&quot;,&#xd;
+      &quot;skuName&quot;: &quot;${skuName_4}&quot;,&#xd;
+      &quot;orderDetailGroups&quot;: [&#xd;
+          {&#xd;
+            &quot;accountingGroupName&quot;: &quot;${accountingGroupName_2}&quot;,&#xd;
+            &quot;quantity&quot;: 100&#xd;
+          },&#xd;
+           {&#xd;
+            &quot;accountingGroupName&quot;: &quot;${accountingGroupName_1}&quot;,&#xd;
+            &quot;quantity&quot;: 20&#xd;
+           }&#xd;
+      	]&#xd;
+      },&#xd;
+      {&#xd;
+      &quot;price&quot;: 5.8,&#xd;
+      &quot;quantity&quot;: ${quantity_4},&#xd;
+      &quot;requiredDate&quot;: &quot;${requiredDate}&quot;,&#xd;
+      &quot;skuId&quot;: &quot;${skuId_5}&quot;,&#xd;
+      &quot;supplierId&quot;: &quot;${supplierID}&quot;,&#xd;
+      &quot;unit&quot;: &quot;${unit_5}&quot;,&#xd;
+      &quot;note&quot;: &quot;&quot;,&#xd;
+      &quot;skuName&quot;: &quot;${skuName_5}&quot;,&#xd;
+      &quot;orderDetailGroups&quot;: [&#xd;
+          {&#xd;
+            &quot;accountingGroupName&quot;: &quot;${accountingGroupName_2}&quot;,&#xd;
+            &quot;quantity&quot;: 100&#xd;
+          },&#xd;
+           {&#xd;
+            &quot;accountingGroupName&quot;: &quot;${accountingGroupName_1}&quot;,&#xd;
+            &quot;quantity&quot;: 20&#xd;
+           }&#xd;
+      	]&#xd;
+      },&#xd;
+      {&#xd;
+      &quot;price&quot;: 0,&#xd;
+      &quot;quantity&quot;: ${quantity_1},&#xd;
+      &quot;requiredDate&quot;: &quot;${requiredDate}&quot;,&#xd;
+      &quot;skuId&quot;: &quot;a53e1c0796204bc2c724257ee211d365&quot;,&#xd;
+      &quot;supplierId&quot;: &quot;${supplierID}&quot;,&#xd;
+      &quot;unit&quot;: &quot;${unit_4}&quot;,&#xd;
+      &quot;note&quot;: &quot;&quot;,&#xd;
+      &quot;skuName&quot;: &quot;白糖/常用品牌/默认规格&quot;,&#xd;
+      &quot;orderDetailGroups&quot;: [&#xd;
+          {&#xd;
+            &quot;accountingGroupName&quot;: &quot;${accountingGroupName_2}&quot;,&#xd;
+            &quot;quantity&quot;: 100&#xd;
+          },&#xd;
+           {&#xd;
+            &quot;accountingGroupName&quot;: &quot;${accountingGroupName_1}&quot;,&#xd;
+            &quot;quantity&quot;: 20&#xd;
+           }&#xd;
+      	]&#xd;
+      }&#xd;
+    ],&#xd;
+    &quot;orderDetailGroups&quot;: [&#xd;
+  {&#xd;
+    &quot;accountingGroupName&quot;: &quot;${accountingGroupName_2}&quot;,&#xd;
+    &quot;ratio&quot;: &quot;1.00&quot;&#xd;
+    },&#xd;
+    {&#xd;
+    &quot;accountingGroupName&quot;: &quot;${accountingGroupName_1}&quot;,&#xd;
+    &quot;ratio&quot;: &quot;1.00&quot;&#xd;
+    }&#xd;
+  ]&#xd;
+}</stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
                   </elementProp>
                 </collectionProp>
@@ -2563,15 +2909,16 @@ WHERE
                     <stringProp name="Argument.value">{&#xd;
     &quot;camenuId&quot;:&quot;&quot;,&#xd;
     &quot;channel&quot;:&quot;N&quot;,&#xd;
-    &quot;orderDetailVos&quot;:[&#xd;
+    &quot;orderDetailDtos&quot;:[&#xd;
         {&#xd;
             &quot;price&quot;:3.5,&#xd;
-            &quot;quantity&quot;:0,&#xd;
+            &quot;quantity&quot;:20,&#xd;
             &quot;requiredDate&quot;:&quot;${requiredDate}&quot;,&#xd;
-            &quot;skuId&quot;:&quot;8817d69d645ed759dccb5d181ef754a8&quot;,&#xd;
+            &quot;skuId&quot;:&quot;4ee1fc66133a634c444a82656af462f2&quot;,&#xd;
             &quot;supplierId&quot;:&quot;${supplierID}&quot;,&#xd;
             &quot;unit&quot;:&quot;斤&quot;,&#xd;
-            &quot;note&quot;:&quot;&quot;,&#xd;
+            &quot;note&quot;:&quot;Jmeter接口自动化测试数据&quot;,&#xd;
+		  &quot;skuName&quot;: &quot;毛菜&quot;,&#xd;
             &quot;orderDetailGroups&quot;:[&#xd;
                 {&#xd;
                     &quot;accountingGroupName&quot;:&quot;${accountingGroupName_2}&quot;,&#xd;
@@ -2585,12 +2932,13 @@ WHERE
         },&#xd;
         {&#xd;
             &quot;price&quot;:6,&#xd;
-            &quot;quantity&quot;:0,&#xd;
+            &quot;quantity&quot;:20,&#xd;
             &quot;requiredDate&quot;:&quot;${requiredDate}&quot;,&#xd;
-            &quot;skuId&quot;:&quot;cf1b850d6d6a4d03f45764df65a45764&quot;,&#xd;
+            &quot;skuId&quot;:&quot;aaaef774d035a8519e0a4ab9fc77d645&quot;,&#xd;
             &quot;supplierId&quot;:&quot;${supplierID}&quot;,&#xd;
             &quot;unit&quot;:&quot;斤&quot;,&#xd;
             &quot;note&quot;:&quot;&quot;,&#xd;
+		  &quot;skuName&quot;: &quot;油豆腐/小油豆腐&quot;,&#xd;
             &quot;orderDetailGroups&quot;:[&#xd;
                 {&#xd;
                     &quot;accountingGroupName&quot;:&quot;${accountingGroupName_2}&quot;,&#xd;
@@ -2604,12 +2952,13 @@ WHERE
         },&#xd;
         {&#xd;
             &quot;price&quot;:4,&#xd;
-            &quot;quantity&quot;:0,&#xd;
+            &quot;quantity&quot;:20,&#xd;
             &quot;requiredDate&quot;:&quot;${requiredDate}&quot;,&#xd;
-            &quot;skuId&quot;:&quot;3160775d69483ef43cf3fc0e8e1a7f54&quot;,&#xd;
+            &quot;skuId&quot;:&quot;50bfacb77626f40d6025d79f27ee8f48&quot;,&#xd;
             &quot;supplierId&quot;:&quot;${supplierID}&quot;,&#xd;
-            &quot;unit&quot;:&quot;斤&quot;,&#xd;
+            &quot;unit&quot;:&quot;瓶&quot;,&#xd;
             &quot;note&quot;:&quot;&quot;,&#xd;
+		  &quot;skuName&quot;: &quot;牛奶(口味奶)/蒙牛/奶特/各种滋味/243ml&quot;,&#xd;
             &quot;orderDetailGroups&quot;:[&#xd;
                 {&#xd;
                     &quot;accountingGroupName&quot;:&quot;${accountingGroupName_2}&quot;,&#xd;
@@ -2623,12 +2972,13 @@ WHERE
         },&#xd;
         {&#xd;
             &quot;price&quot;:12,&#xd;
-            &quot;quantity&quot;:0,&#xd;
+            &quot;quantity&quot;:20,&#xd;
             &quot;requiredDate&quot;:&quot;${requiredDate}&quot;,&#xd;
-            &quot;skuId&quot;:&quot;82a4663c4900f9ee5b237eb46a09d07e&quot;,&#xd;
+            &quot;skuId&quot;:&quot;3e63177abbe4a5c4647bd34d693c4fed&quot;,&#xd;
             &quot;supplierId&quot;:&quot;${supplierID}&quot;,&#xd;
             &quot;unit&quot;:&quot;斤&quot;,&#xd;
             &quot;note&quot;:&quot;&quot;,&#xd;
+		  &quot;skuName&quot;: &quot;猪肉/去皮/后腿/末&quot;,&#xd;
             &quot;orderDetailGroups&quot;:[&#xd;
                 {&#xd;
                     &quot;accountingGroupName&quot;:&quot;${accountingGroupName_2}&quot;,&#xd;
@@ -2683,6 +3033,15 @@ WHERE
                 <stringProp name="RegexExtractor.match_number">1</stringProp>
               </RegexExtractor>
               <hashTree/>
+              <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="正则表达式提取器 orderNo" enabled="true">
+                <stringProp name="RegexExtractor.useHeaders">false</stringProp>
+                <stringProp name="RegexExtractor.refname">orderNo</stringProp>
+                <stringProp name="RegexExtractor.regex">&quot;orderNo&quot; : &quot;(.+?)&quot;</stringProp>
+                <stringProp name="RegexExtractor.template">$1$</stringProp>
+                <stringProp name="RegexExtractor.default"></stringProp>
+                <stringProp name="RegexExtractor.match_number">1</stringProp>
+              </RegexExtractor>
+              <hashTree/>
             </hashTree>
             <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="查询自建订单详情 orderDetail" enabled="true">
               <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="用户定义的变量" enabled="true">
@@ -2713,12 +3072,192 @@ WHERE
               </RegexExtractor>
               <hashTree/>
             </hashTree>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="删除订单 DELETE" enabled="false">
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="生成配送单 create" enabled="true">
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="用户定义的变量" enabled="true">
+                <collectionProp name="Arguments.arguments"/>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain"></stringProp>
+              <stringProp name="HTTPSampler.port"></stringProp>
+              <stringProp name="HTTPSampler.protocol"></stringProp>
+              <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+              <stringProp name="HTTPSampler.path">/service/catering/order/place/${orderId}</stringProp>
+              <stringProp name="HTTPSampler.method">PUT</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+              <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+              <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            </HTTPSamplerProxy>
+            <hashTree/>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="查询订单生成的配送单列表 distribution" enabled="false">
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="用户定义的变量" enabled="true">
+                <collectionProp name="Arguments.arguments"/>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain"></stringProp>
+              <stringProp name="HTTPSampler.port"></stringProp>
+              <stringProp name="HTTPSampler.protocol"></stringProp>
+              <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+              <stringProp name="HTTPSampler.path">/service/catering/distribution/pageQuery?current=1&amp;orderNo=${orderNo}</stringProp>
+              <stringProp name="HTTPSampler.method">GET</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+              <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+              <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="正则表达式提取器 distributionId" enabled="true">
+                <stringProp name="RegexExtractor.useHeaders">false</stringProp>
+                <stringProp name="RegexExtractor.refname">distributionId</stringProp>
+                <stringProp name="RegexExtractor.regex">&quot;id&quot; : &quot;(.+?)&quot;,</stringProp>
+                <stringProp name="RegexExtractor.template">$1$</stringProp>
+                <stringProp name="RegexExtractor.default"></stringProp>
+                <stringProp name="RegexExtractor.match_number">-1</stringProp>
+              </RegexExtractor>
+              <hashTree/>
+            </hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="跳转到配送单详情 distributionDetail" enabled="false">
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="用户定义的变量" enabled="true">
+                <collectionProp name="Arguments.arguments"/>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain"></stringProp>
+              <stringProp name="HTTPSampler.port"></stringProp>
+              <stringProp name="HTTPSampler.protocol"></stringProp>
+              <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+              <stringProp name="HTTPSampler.path">/service/catering/distribution/${distributionId_1}</stringProp>
+              <stringProp name="HTTPSampler.method">GET</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+              <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+              <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="正则表达式提取器 orderDetailId" enabled="true">
+                <stringProp name="RegexExtractor.useHeaders">false</stringProp>
+                <stringProp name="RegexExtractor.refname">orderDetailId</stringProp>
+                <stringProp name="RegexExtractor.regex">&quot;id&quot; : &quot;(.+?)&quot;</stringProp>
+                <stringProp name="RegexExtractor.template">$1$</stringProp>
+                <stringProp name="RegexExtractor.default"></stringProp>
+                <stringProp name="RegexExtractor.match_number">-1</stringProp>
+              </RegexExtractor>
+              <hashTree/>
+            </hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="调整配送单商品(新增一个sku) adjust" enabled="false">
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">{&#xd;
+	&quot;id&quot;: &quot;${distributionId_1}&quot;,&#xd;
+	&quot;supplierId&quot;: &quot;${supplierID}&quot;,&#xd;
+	&quot;distributionDate&quot;: &quot;${requiredDate}&quot;,&#xd;
+	&quot;accountingGroupName&quot;: &quot;${accountingGroupName_1}&quot;,&#xd;
+	&quot;distributionDetails&quot;: [&#xd;
+		{&#xd;
+		&quot;id&quot;: &quot;${orderDetailId_4}&quot;,&#xd;
+		&quot;key&quot;: &quot;0&quot;,&#xd;
+		&quot;distributionQuantity&quot;: 20,&#xd;
+		&quot;distributionPrice&quot;: 3.5,&#xd;
+		&quot;distributionSkuId&quot;: &quot;4ee1fc66133a634c444a82656af462f2&quot;,&#xd;
+		&quot;distributionSkuName&quot;: &quot;毛菜&quot;,&#xd;
+		&quot;distributionUnit&quot;: &quot;斤&quot;,&#xd;
+		&quot;isPrice&quot;: true,&#xd;
+		&quot;note&quot;: &quot;Jmeter接口自动化测试数据&quot;&#xd;
+		},&#xd;
+		{&#xd;
+		&quot;id&quot;: &quot;${orderDetailId_7}&quot;,&#xd;
+		&quot;key&quot;: &quot;1&quot;,&#xd;
+		&quot;distributionQuantity&quot;: 20,&#xd;
+		&quot;distributionPrice&quot;: 4,&#xd;
+		&quot;distributionSkuId&quot;: &quot;aaaef774d035a8519e0a4ab9fc77d645&quot;,&#xd;
+		&quot;distributionSkuName&quot;: &quot;油豆腐/小油豆腐&quot;,&#xd;
+		&quot;distributionUnit&quot;: &quot;斤&quot;,&#xd;
+		&quot;isPrice&quot;: true,&#xd;
+		&quot;note&quot;: &quot;&quot;&#xd;
+		},&#xd;
+		{&#xd;
+		&quot;id&quot;: &quot;${orderDetailId_10}&quot;,&#xd;
+		&quot;key&quot;: &quot;2&quot;,&#xd;
+		&quot;distributionQuantity&quot;: 20,&#xd;
+		&quot;distributionPrice&quot;: 6,&#xd;
+		&quot;distributionSkuId&quot;: &quot;50bfacb77626f40d6025d79f27ee8f48&quot;,&#xd;
+		&quot;distributionSkuName&quot;: &quot;牛奶(口味奶)/蒙牛/奶特/各种滋味/243ml&quot;,&#xd;
+		&quot;distributionUnit&quot;: &quot;斤&quot;,&#xd;
+		&quot;isPrice&quot;: true,&#xd;
+		&quot;note&quot;: &quot;&quot;&#xd;
+		},&#xd;
+		{&#xd;
+		&quot;id&quot;: &quot;${orderDetailId_13}&quot;,&#xd;
+		&quot;key&quot;: &quot;3&quot;,&#xd;
+		&quot;distributionQuantity&quot;: 20,&#xd;
+		&quot;distributionPrice&quot;: 12,&#xd;
+		&quot;distributionSkuId&quot;: &quot;3e63177abbe4a5c4647bd34d693c4fed&quot;,&#xd;
+		&quot;distributionSkuName&quot;: &quot;猪肉/去皮/后腿/末&quot;,&#xd;
+		&quot;distributionUnit&quot;: &quot;斤&quot;,&#xd;
+		&quot;isPrice&quot;: true,&#xd;
+		&quot;note&quot;: &quot;&quot;&#xd;
+		},&#xd;
+		{&#xd;
+		&quot;id&quot;: &quot;&quot;,&#xd;
+		&quot;key&quot;: &quot;4&quot;,&#xd;
+		&quot;distributionQuantity&quot;: 20,&#xd;
+		&quot;distributionPrice&quot;: 7,&#xd;
+		&quot;distributionSkuId&quot;: &quot;665835c648e3b9290c0f5a6ceca66a70&quot;,&#xd;
+		&quot;distributionSkuName&quot;: &quot;茄子&quot;,&#xd;
+		&quot;distributionUnit&quot;: &quot;斤&quot;,&#xd;
+		&quot;isPrice&quot;: true,&#xd;
+		&quot;note&quot;: &quot;&quot;&#xd;
+		}&#xd;
+	]&#xd;
+}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain"></stringProp>
+              <stringProp name="HTTPSampler.port"></stringProp>
+              <stringProp name="HTTPSampler.protocol"></stringProp>
+              <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+              <stringProp name="HTTPSampler.path">/service/catering/distribution/${distributionId_1}</stringProp>
+              <stringProp name="HTTPSampler.method">PUT</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+              <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+              <stringProp name="HTTPSampler.response_timeout"></stringProp>
+              <stringProp name="TestPlan.comments">id为空代表无orderDetailId，即为新增商品</stringProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP信息头管理器" enabled="true">
+                <collectionProp name="HeaderManager.headers">
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Authorization</stringProp>
+                    <stringProp name="Header.value">Bearer ${header}</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Content-Type</stringProp>
+                    <stringProp name="Header.value">application/json;charset=UTF-8</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </HeaderManager>
+              <hashTree/>
+            </hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="取消配送单 delete" enabled="false">
               <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="用户定义的变量" enabled="true">
                 <collectionProp name="Arguments.arguments">
                   <elementProp name="ids[]" elementType="HTTPArgument">
                     <boolProp name="HTTPArgument.always_encode">true</boolProp>
-                    <stringProp name="Argument.value">${orderId}</stringProp>
+                    <stringProp name="Argument.value">${distributionId_1}</stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
                     <boolProp name="HTTPArgument.use_equals">true</boolProp>
                     <stringProp name="Argument.name">ids[]</stringProp>
@@ -2729,7 +3268,7 @@ WHERE
               <stringProp name="HTTPSampler.port"></stringProp>
               <stringProp name="HTTPSampler.protocol"></stringProp>
               <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-              <stringProp name="HTTPSampler.path">/service/catering/order/deleteByIds</stringProp>
+              <stringProp name="HTTPSampler.path">/service/catering/distribution/deleteByIds</stringProp>
               <stringProp name="HTTPSampler.method">DELETE</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
               <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -2738,6 +3277,48 @@ WHERE
               <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
               <stringProp name="HTTPSampler.connect_timeout"></stringProp>
               <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP信息头管理器" enabled="true">
+                <collectionProp name="HeaderManager.headers">
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Authorization</stringProp>
+                    <stringProp name="Header.value">Bearer ${header}</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Content-Type</stringProp>
+                    <stringProp name="Header.value">application/json;charset=UTF-8</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </HeaderManager>
+              <hashTree/>
+            </hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="取消最后一张配送单 delete" enabled="false">
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="用户定义的变量" enabled="true">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="ids[]" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">true</boolProp>
+                    <stringProp name="Argument.value">${distributionId_4}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">ids[]</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain"></stringProp>
+              <stringProp name="HTTPSampler.port"></stringProp>
+              <stringProp name="HTTPSampler.protocol"></stringProp>
+              <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+              <stringProp name="HTTPSampler.path">/service/catering/distribution/deleteByIds</stringProp>
+              <stringProp name="HTTPSampler.method">DELETE</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+              <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+              <stringProp name="HTTPSampler.response_timeout"></stringProp>
+              <stringProp name="TestPlan.comments">删除配送单同时删除订单</stringProp>
             </HTTPSamplerProxy>
             <hashTree>
               <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP信息头管理器" enabled="true">
@@ -3820,7 +4401,7 @@ WHERE
             </hashTree>
           </hashTree>
         </hashTree>
-        <ConstantThroughputTimer guiclass="TestBeanGUI" testclass="ConstantThroughputTimer" testname="常数吞吐量定时器" enabled="true">
+        <ConstantThroughputTimer guiclass="TestBeanGUI" testclass="ConstantThroughputTimer" testname="常数吞吐量定时器" enabled="false">
           <intProp name="calcMode">0</intProp>
           <doubleProp>
             <name>throughput</name>
@@ -3902,6 +4483,52 @@ WHERE
           </objProp>
           <stringProp name="filename"></stringProp>
         </ResultCollector>
+        <hashTree/>
+        <kg.apc.jmeter.perfmon.PerfMonCollector guiclass="kg.apc.jmeter.vizualizers.PerfMonGui" testclass="kg.apc.jmeter.perfmon.PerfMonCollector" testname="jp@gc - PerfMon Metrics Collector" enabled="true">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>true</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+              <sentBytes>true</sentBytes>
+              <url>true</url>
+              <threadCounts>true</threadCounts>
+              <idleTime>true</idleTime>
+              <connectTime>true</connectTime>
+            </value>
+          </objProp>
+          <stringProp name="filename"></stringProp>
+          <longProp name="interval_grouping">1000</longProp>
+          <boolProp name="graph_aggregated">false</boolProp>
+          <stringProp name="include_sample_labels"></stringProp>
+          <stringProp name="exclude_sample_labels"></stringProp>
+          <stringProp name="start_offset"></stringProp>
+          <stringProp name="end_offset"></stringProp>
+          <boolProp name="include_checkbox_state">false</boolProp>
+          <boolProp name="exclude_checkbox_state">false</boolProp>
+          <collectionProp name="metricConnections"/>
+        </kg.apc.jmeter.perfmon.PerfMonCollector>
         <hashTree/>
       </hashTree>
     </hashTree>
