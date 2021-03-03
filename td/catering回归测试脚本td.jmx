@@ -84,8 +84,8 @@
             </elementProp>
             <elementProp name="supplierId" elementType="Argument">
               <stringProp name="Argument.name">supplierId</stringProp>
-              <stringProp name="Argument.value">ff537cf4da959ed130670cc031cf2a31</stringProp>
-              <stringProp name="Argument.desc">设置-供货商-兰州供货商</stringProp>
+              <stringProp name="Argument.value">96ee9f9cf4fa58ce64f625c941f9e738</stringProp>
+              <stringProp name="Argument.desc">设置-供货商-停用的供货商</stringProp>
               <stringProp name="Argument.metadata">=</stringProp>
             </elementProp>
             <elementProp name="supplierID" elementType="Argument">
@@ -2616,7 +2616,7 @@ SELECT   DATE_FORMAT(NOW(), &apos;%Y&apos;)</stringProp>
             &quot;sort&quot;:1&#xd;
         },&#xd;
         {&#xd;
-            &quot;foodId&quot;:&quot;f3a49f0473ac8fb4659c344b29053dec&quot;,&#xd;
+            &quot;foodId&quot;:&quot;26c3c2a4a4518b697f13287575dcf828&quot;,&#xd;
             &quot;zj&quot;: &quot;${ZJ_3}&quot;,&#xd;
             &quot;mealTimes&quot;:&quot;${MealTimes_3}&quot;,&#xd;
             &quot;foodName&quot;: &quot;${foodName_3}&quot;,&#xd;
@@ -2779,65 +2779,6 @@ SELECT   DATE_FORMAT(NOW(), &apos;%Y&apos;)</stringProp>
               </HeaderManager>
               <hashTree/>
             </hashTree>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="查询添加的常用配料" enabled="true">
-              <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="用户定义的变量" enabled="true">
-                <collectionProp name="Arguments.arguments"/>
-              </elementProp>
-              <stringProp name="HTTPSampler.domain"></stringProp>
-              <stringProp name="HTTPSampler.port"></stringProp>
-              <stringProp name="HTTPSampler.protocol"></stringProp>
-              <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-              <stringProp name="HTTPSampler.path">/service/catering/setting/menuPartner/listQuery</stringProp>
-              <stringProp name="HTTPSampler.method">GET</stringProp>
-              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
-              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-              <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
-              <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-              <stringProp name="HTTPSampler.response_timeout"></stringProp>
-            </HTTPSamplerProxy>
-            <hashTree/>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="常用配料为空（全部删除）" enabled="true">
-              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
-              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
-                <collectionProp name="Arguments.arguments">
-                  <elementProp name="" elementType="HTTPArgument">
-                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                    <stringProp name="Argument.value">[]</stringProp>
-                    <stringProp name="Argument.metadata">=</stringProp>
-                  </elementProp>
-                </collectionProp>
-              </elementProp>
-              <stringProp name="HTTPSampler.domain"></stringProp>
-              <stringProp name="HTTPSampler.port"></stringProp>
-              <stringProp name="HTTPSampler.protocol"></stringProp>
-              <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-              <stringProp name="HTTPSampler.path">/service/catering/setting/menuPartner</stringProp>
-              <stringProp name="HTTPSampler.method">POST</stringProp>
-              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
-              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-              <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
-              <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-              <stringProp name="HTTPSampler.response_timeout"></stringProp>
-            </HTTPSamplerProxy>
-            <hashTree>
-              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP信息头管理器" enabled="true">
-                <collectionProp name="HeaderManager.headers">
-                  <elementProp name="" elementType="Header">
-                    <stringProp name="Header.name">Authorization</stringProp>
-                    <stringProp name="Header.value">Bearer ${header}</stringProp>
-                  </elementProp>
-                  <elementProp name="" elementType="Header">
-                    <stringProp name="Header.name">Content-Type</stringProp>
-                    <stringProp name="Header.value">application/json; charset=utf-8</stringProp>
-                  </elementProp>
-                </collectionProp>
-              </HeaderManager>
-              <hashTree/>
-            </hashTree>
             <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="(去采购)预生成订单 preOrder" enabled="true">
               <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="用户定义的变量" enabled="true">
                 <collectionProp name="Arguments.arguments"/>
@@ -2870,10 +2811,10 @@ SELECT   DATE_FORMAT(NOW(), &apos;%Y&apos;)</stringProp>
                 </collectionProp>
               </HeaderManager>
               <hashTree/>
-              <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="正则表达式提取器 id" enabled="true">
+              <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="正则表达式提取器 skuId" enabled="true">
                 <stringProp name="RegexExtractor.useHeaders">false</stringProp>
                 <stringProp name="RegexExtractor.refname">id</stringProp>
-                <stringProp name="RegexExtractor.regex">&quot;id&quot; : &quot;(.+?)&quot;,</stringProp>
+                <stringProp name="RegexExtractor.regex">&quot;skuId&quot; : &quot;(.+?)&quot;,</stringProp>
                 <stringProp name="RegexExtractor.template">$1$</stringProp>
                 <stringProp name="RegexExtractor.default"></stringProp>
                 <stringProp name="RegexExtractor.match_number">-1</stringProp>
@@ -2910,6 +2851,15 @@ SELECT   DATE_FORMAT(NOW(), &apos;%Y&apos;)</stringProp>
                 <stringProp name="RegexExtractor.useHeaders">false</stringProp>
                 <stringProp name="RegexExtractor.refname">price</stringProp>
                 <stringProp name="RegexExtractor.regex">&quot;price&quot; : (.+?),</stringProp>
+                <stringProp name="RegexExtractor.template">$1$</stringProp>
+                <stringProp name="RegexExtractor.default"></stringProp>
+                <stringProp name="RegexExtractor.match_number">-1</stringProp>
+              </RegexExtractor>
+              <hashTree/>
+              <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="正则表达式提取器 skuName" enabled="true">
+                <stringProp name="RegexExtractor.useHeaders">false</stringProp>
+                <stringProp name="RegexExtractor.refname">skuName</stringProp>
+                <stringProp name="RegexExtractor.regex">&quot;skuName&quot; : &quot;(.+?)&quot;,</stringProp>
                 <stringProp name="RegexExtractor.template">$1$</stringProp>
                 <stringProp name="RegexExtractor.default"></stringProp>
                 <stringProp name="RegexExtractor.match_number">-1</stringProp>
@@ -2957,47 +2907,6 @@ SELECT   DATE_FORMAT(NOW(), &apos;%Y&apos;)</stringProp>
               </HeaderManager>
               <hashTree/>
             </hashTree>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="常用配料非空 （添加常用配料-小葱）" enabled="true">
-              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
-              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
-                <collectionProp name="Arguments.arguments">
-                  <elementProp name="" elementType="HTTPArgument">
-                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                    <stringProp name="Argument.value">&#xd;
-[{&quot;quantity&quot;:2,&quot;skuId&quot;:&quot;b66db44a39223e8e537fcd0c17006f97&quot;,&quot;unit&quot;:&quot;斤&quot;}]</stringProp>
-                    <stringProp name="Argument.metadata">=</stringProp>
-                  </elementProp>
-                </collectionProp>
-              </elementProp>
-              <stringProp name="HTTPSampler.domain"></stringProp>
-              <stringProp name="HTTPSampler.port"></stringProp>
-              <stringProp name="HTTPSampler.protocol"></stringProp>
-              <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-              <stringProp name="HTTPSampler.path">/service/catering/setting/menuPartner</stringProp>
-              <stringProp name="HTTPSampler.method">POST</stringProp>
-              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
-              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-              <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
-              <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-              <stringProp name="HTTPSampler.response_timeout"></stringProp>
-            </HTTPSamplerProxy>
-            <hashTree>
-              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP信息头管理器" enabled="true">
-                <collectionProp name="HeaderManager.headers">
-                  <elementProp name="" elementType="Header">
-                    <stringProp name="Header.name">Authorization</stringProp>
-                    <stringProp name="Header.value">Bearer ${header}</stringProp>
-                  </elementProp>
-                  <elementProp name="" elementType="Header">
-                    <stringProp name="Header.name">Content-Type</stringProp>
-                    <stringProp name="Header.value">application/json; charset=utf-8</stringProp>
-                  </elementProp>
-                </collectionProp>
-              </HeaderManager>
-              <hashTree/>
-            </hashTree>
             <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="生成采购单 order" enabled="true">
               <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
               <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
@@ -3005,14 +2914,25 @@ SELECT   DATE_FORMAT(NOW(), &apos;%Y&apos;)</stringProp>
                   <elementProp name="" elementType="HTTPArgument">
                     <boolProp name="HTTPArgument.always_encode">false</boolProp>
                     <stringProp name="Argument.value">{&#xd;
-	&quot;camenuId&quot;:&quot;${camenu_ID}&quot;,&#xd;
-	&quot;channel&quot;:&quot;M&quot;,&#xd;
-	&quot;orderDetailVos&quot;:&#xd;
+&quot;orderDetailGroups&quot;: [&#xd;
+		{&#xd;
+			&quot;key&quot;: 0,&#xd;
+			&quot;accountingGroupName&quot;: &quot;${accountingGroupName_2}&quot;,&#xd;
+			&quot;quantity&quot;: 0&#xd;
+		},&#xd;
+		{&#xd;
+			&quot;key&quot;: 1,&#xd;
+			&quot;accountingGroupName&quot;: &quot;${accountingGroupName_1}&quot;,&#xd;
+			&quot;quantity&quot;: 0&#xd;
+		}&#xd;
+	],&#xd;
+	&quot;orderDetailDtos&quot;:&#xd;
 	[&#xd;
 	{	&quot;price&quot;:3,&quot;quantity&quot;:${quantity_1},&#xd;
 		&quot;supplierId&quot;:&quot;${supplierID}&quot;,&#xd;
 		&quot;skuId&quot;:&quot;${id_1}&quot;,&quot;unit&quot;:&quot;${unit_1}&quot;,&quot;requiredDate&quot;:&quot;${requiredDate}&quot;,&#xd;
-		&quot;note&quot;:&quot;&quot;,&#xd;
+		&quot;note&quot;:&quot;&quot;,&quot;skuName&quot;:&quot;${skuName_1}&quot;,&quot;id&quot;:&quot;${id_1}&quot;,&#xd;
+		&quot;disabled&quot;: false,&quot;bindSupplier&quot;: true,&quot;stop&quot;: false,&#xd;
 		&quot;orderDetailGroups&quot;:[&#xd;
 			 {&#xd;
           		&quot;accountingGroupName&quot;:&quot;${accountingGroupName_2}&quot;,&#xd;
@@ -3025,8 +2945,9 @@ SELECT   DATE_FORMAT(NOW(), &apos;%Y&apos;)</stringProp>
             ]&#xd;
         },{	&quot;price&quot;:1,&quot;quantity&quot;:2,    &#xd;
 		&quot;supplierId&quot;:&quot;${supplierID}&quot;,&#xd;
-		&quot;skuId&quot;:&quot;${id_3}&quot;,&quot;unit&quot;:&quot;${unit_2}&quot;,&quot;requiredDate&quot;:&quot;${requiredDate}&quot;,&#xd;
-		&quot;note&quot;:&quot;&quot;,&#xd;
+		&quot;skuId&quot;:&quot;${id_2}&quot;,&quot;unit&quot;:&quot;${unit_2}&quot;,&quot;requiredDate&quot;:&quot;${requiredDate}&quot;,&#xd;
+		&quot;note&quot;:&quot;&quot;,&quot;skuName&quot;:&quot;${skuName_2}&quot;,&quot;id&quot;:&quot;${id_2}&quot;,&#xd;
+		&quot;disabled&quot;: false,&quot;bindSupplier&quot;: true,&quot;stop&quot;: false,&#xd;
 		&quot;orderDetailGroups&quot;:[&#xd;
 			 {&#xd;
           		&quot;accountingGroupName&quot;:&quot;${accountingGroupName_2}&quot;,&#xd;
@@ -3040,8 +2961,9 @@ SELECT   DATE_FORMAT(NOW(), &apos;%Y&apos;)</stringProp>
         },&#xd;
 	{	&quot;price&quot;:5,&quot;quantity&quot;:${quantity_4},&#xd;
 		&quot;supplierId&quot;:&quot;${supplierID}&quot;,&#xd;
-		&quot;skuId&quot;:&quot;${id_5}&quot;,&quot;unit&quot;:&quot;${unit_3}&quot;,&quot;requiredDate&quot;:&quot;${requiredDate}&quot;,&#xd;
-		&quot;note&quot;:&quot;&quot;,&#xd;
+		&quot;skuId&quot;:&quot;${id_3}&quot;,&quot;unit&quot;:&quot;${unit_3}&quot;,&quot;requiredDate&quot;:&quot;${requiredDate}&quot;,&#xd;
+		&quot;note&quot;:&quot;&quot;,&quot;skuName&quot;:&quot;${skuName_3}&quot;,&quot;id&quot;:&quot;${id_3}&quot;,&#xd;
+		&quot;disabled&quot;: false,&quot;bindSupplier&quot;: true,&quot;stop&quot;: false,&#xd;
             &quot;orderDetailGroups&quot;:[&#xd;
                 {&#xd;
                     &quot;accountingGroupName&quot;:&quot;${accountingGroupName_2}&quot;,&#xd;
@@ -3055,8 +2977,9 @@ SELECT   DATE_FORMAT(NOW(), &apos;%Y&apos;)</stringProp>
         },&#xd;
 	{	&quot;price&quot;:7,&quot;quantity&quot;:${quantity_7},&#xd;
 		&quot;supplierId&quot;:&quot;${supplierID}&quot;,&#xd;
-		&quot;skuId&quot;:&quot;${id_7}&quot;,&quot;unit&quot;:&quot;${unit_4}&quot;,&quot;requiredDate&quot;:&quot;${requiredDate}&quot;,&#xd;
-		&quot;note&quot;:&quot;&quot;,&#xd;
+		&quot;skuId&quot;:&quot;${id_4}&quot;,&quot;unit&quot;:&quot;${unit_4}&quot;,&quot;requiredDate&quot;:&quot;${requiredDate}&quot;,&#xd;
+		&quot;note&quot;:&quot;&quot;,&quot;skuName&quot;:&quot;${skuName_4}&quot;,&quot;id&quot;:&quot;${id_4}&quot;,&#xd;
+		&quot;disabled&quot;: false,&quot;bindSupplier&quot;: true,&quot;stop&quot;: false,&#xd;
             &quot;orderDetailGroups&quot;:[&#xd;
                 {&#xd;
                     &quot;accountingGroupName&quot;:&quot;${accountingGroupName_2}&quot;,&#xd;
@@ -3072,8 +2995,9 @@ SELECT   DATE_FORMAT(NOW(), &apos;%Y&apos;)</stringProp>
         },		&#xd;
 	{	&quot;price&quot;:6,&quot;quantity&quot;:${quantity_4},&#xd;
 		&quot;supplierId&quot;:&quot;${supplierID}&quot;,&#xd;
-		&quot;skuId&quot;:&quot;${id_9}&quot;,&quot;unit&quot;:&quot;${unit_5}&quot;,&quot;requiredDate&quot;:&quot;${requiredDate}&quot;,&#xd;
-		&quot;note&quot;:&quot;&quot;,&#xd;
+		&quot;skuId&quot;:&quot;${id_5}&quot;,&quot;unit&quot;:&quot;${unit_5}&quot;,&quot;requiredDate&quot;:&quot;${requiredDate}&quot;,&#xd;
+		&quot;note&quot;:&quot;&quot;,&quot;skuName&quot;:&quot;${skuName_5}&quot;,&quot;id&quot;:&quot;${id_5}&quot;,&#xd;
+		&quot;disabled&quot;: false,&quot;bindSupplier&quot;: true,&quot;stop&quot;: false,&#xd;
             &quot;orderDetailGroups&quot;:[&#xd;
                 {&#xd;
                     &quot;accountingGroupName&quot;:&quot;${accountingGroupName_2}&quot;,&#xd;
@@ -3088,8 +3012,9 @@ SELECT   DATE_FORMAT(NOW(), &apos;%Y&apos;)</stringProp>
         },	&#xd;
      {	&quot;price&quot;:2,&quot;quantity&quot;:${quantity_7},&#xd;
 		&quot;supplierId&quot;:&quot;${supplierID}&quot;,&#xd;
-		&quot;skuId&quot;:&quot;${id_11}&quot;,&quot;unit&quot;:&quot;${unit_6}&quot;,&quot;requiredDate&quot;:&quot;${requiredDate}&quot;,&#xd;
-		&quot;note&quot;:&quot;&quot;,	&#xd;
+		&quot;skuId&quot;:&quot;${id_6}&quot;,&quot;unit&quot;:&quot;${unit_6}&quot;,&quot;requiredDate&quot;:&quot;${requiredDate}&quot;,&#xd;
+		&quot;note&quot;:&quot;&quot;,&quot;skuName&quot;:&quot;${skuName_6}&quot;,&quot;id&quot;:&quot;${id_6}&quot;,&#xd;
+		&quot;disabled&quot;: false,&quot;bindSupplier&quot;: true,&quot;stop&quot;: false,&#xd;
             &quot;orderDetailGroups&quot;:[&#xd;
                 {&#xd;
                     &quot;accountingGroupName&quot;:&quot;${accountingGroupName_2}&quot;,&#xd;
@@ -3101,27 +3026,11 @@ SELECT   DATE_FORMAT(NOW(), &apos;%Y&apos;)</stringProp>
                 }&#xd;
             ],&#xd;
             &quot;snack&quot;:false&#xd;
-        },		&#xd;
-     {	&quot;price&quot;:5.5,&quot;quantity&quot;:${quantity_1},&#xd;
-		&quot;supplierId&quot;:&quot;${supplierID}&quot;,&#xd;
-		&quot;skuId&quot;:&quot;${id_13}&quot;,&quot;unit&quot;:&quot;${unit_7}&quot;,&quot;requiredDate&quot;:&quot;${requiredDate}&quot;,&#xd;
-		&quot;note&quot;:&quot;&quot;,	&#xd;
-            &quot;orderDetailGroups&quot;:[&#xd;
-                {&#xd;
-                    &quot;accountingGroupName&quot;:&quot;${accountingGroupName_2}&quot;,&#xd;
-                    &quot;quantity&quot;:${quantity_2}&#xd;
-                },&#xd;
-                {&#xd;
-                    &quot;accountingGroupName&quot;:&quot;${accountingGroupName_1}&quot;,&#xd;
-                    &quot;quantity&quot;:${quantity_3}&#xd;
-                }&#xd;
-            ],&#xd;
-            &quot;snack&quot;:false&#xd;
         }&#xd;
-            ],&#xd;
-            &quot;snack&quot;:false		&#xd;
-	}&#xd;
-	]&#xd;
+&#xd;
+	],&#xd;
+	&quot;camenuId&quot;:&quot;${camenu_ID}&quot;,&#xd;
+	&quot;channel&quot;:&quot;M&quot;&#xd;
 }&#xd;
 		//  报未知错误时需要确认是否skuID取错了（检查上一接口返回值，有时会取成供货商id）</stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
@@ -4184,9 +4093,21 @@ WHERE
                   <elementProp name="" elementType="HTTPArgument">
                     <boolProp name="HTTPArgument.always_encode">false</boolProp>
                     <stringProp name="Argument.value">{&#xd;
-    &quot;camenuId&quot;:&quot;&quot;,&#xd;
-    &quot;channel&quot;:&quot;N&quot;,&#xd;
-    &quot;orderDetailVos&quot;:[&#xd;
+&quot;orderDetailGroups&quot;: [&#xd;
+		{&#xd;
+			&quot;key&quot;: 0,&#xd;
+			&quot;accountingGroupName&quot;: &quot;${accountingGroupName_2}&quot;,&#xd;
+			&quot;quantity&quot;: 0,&#xd;
+			&quot;ratio&quot;: &quot;0.91&quot;&#xd;
+		},&#xd;
+		{&#xd;
+			&quot;key&quot;: 1,&#xd;
+			&quot;accountingGroupName&quot;: &quot;${accountingGroupName_1}&quot;,&#xd;
+			&quot;quantity&quot;: 0,&#xd;
+			&quot;ratio&quot;: &quot;0.09&quot;&#xd;
+		}&#xd;
+	],&#xd;
+    &quot;orderDetailDtos&quot;:[&#xd;
         {&#xd;
             &quot;price&quot;:3.5,&#xd;
             &quot;quantity&quot;:0,&#xd;
@@ -4195,6 +4116,8 @@ WHERE
             &quot;supplierId&quot;:&quot;${supplierID}&quot;,&#xd;
             &quot;unit&quot;:&quot;斤&quot;,&#xd;
             &quot;note&quot;:&quot;&quot;,&#xd;
+            &quot;skuName&quot;:&quot;粉丝/捞面&quot;,&quot;id&quot;:&quot;8817d69d645ed759dccb5d181ef754a8&quot;,&#xd;
+		&quot;disabled&quot;: false,&quot;bindSupplier&quot;: true,&quot;stop&quot;: false,&#xd;
             &quot;orderDetailGroups&quot;:[&#xd;
                 {&#xd;
                     &quot;accountingGroupName&quot;:&quot;${accountingGroupName_2}&quot;,&#xd;
@@ -4214,6 +4137,8 @@ WHERE
             &quot;supplierId&quot;:&quot;${supplierID}&quot;,&#xd;
             &quot;unit&quot;:&quot;斤&quot;,&#xd;
             &quot;note&quot;:&quot;&quot;,&#xd;
+            &quot;skuName&quot;:&quot;番薯&quot;,&quot;id&quot;:&quot;cf1b850d6d6a4d03f45764df65a45764&quot;,&#xd;
+		  &quot;disabled&quot;: false,&quot;bindSupplier&quot;: true,&quot;stop&quot;: false,&#xd;
             &quot;orderDetailGroups&quot;:[&#xd;
                 {&#xd;
                     &quot;accountingGroupName&quot;:&quot;${accountingGroupName_2}&quot;,&#xd;
@@ -4233,6 +4158,8 @@ WHERE
             &quot;supplierId&quot;:&quot;${supplierID}&quot;,&#xd;
             &quot;unit&quot;:&quot;斤&quot;,&#xd;
             &quot;note&quot;:&quot;&quot;,&#xd;
+            &quot;skuName&quot;:&quot;腐竹/干&quot;,&quot;id&quot;:&quot;3160775d69483ef43cf3fc0e8e1a7f54&quot;,&#xd;
+		  &quot;disabled&quot;: false,&quot;bindSupplier&quot;: true,&quot;stop&quot;: false,&#xd;
             &quot;orderDetailGroups&quot;:[&#xd;
                 {&#xd;
                     &quot;accountingGroupName&quot;:&quot;${accountingGroupName_2}&quot;,&#xd;
@@ -4252,6 +4179,8 @@ WHERE
             &quot;supplierId&quot;:&quot;${supplierID}&quot;,&#xd;
             &quot;unit&quot;:&quot;斤&quot;,&#xd;
             &quot;note&quot;:&quot;&quot;,&#xd;
+            &quot;skuName&quot;:&quot;干海带/常用品牌/默认规格&quot;,&quot;id&quot;:&quot;82a4663c4900f9ee5b237eb46a09d07e&quot;,&#xd;
+		  &quot;disabled&quot;: false,&quot;bindSupplier&quot;: true,&quot;stop&quot;: false,&#xd;
             &quot;orderDetailGroups&quot;:[&#xd;
                 {&#xd;
                     &quot;accountingGroupName&quot;:&quot;${accountingGroupName_2}&quot;,&#xd;
@@ -4260,10 +4189,14 @@ WHERE
                 {&#xd;
                     &quot;accountingGroupName&quot;:&quot;${accountingGroupName_1}&quot;,&#xd;
                     &quot;quantity&quot;:7&#xd;
-                }&#xd;
-            ]&#xd;
+               }&#xd;
+            ],&#xd;
+            &quot;snack&quot;:false&#xd;
         }&#xd;
-    ]&#xd;
+&#xd;
+	],&#xd;
+	&quot;camenuId&quot;:&quot;&quot;,&#xd;
+	&quot;channel&quot;:&quot;N&quot;&#xd;
 }</stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
                   </elementProp>
